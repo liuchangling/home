@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>my mvvm</title>
+		<script src="./util.js"></script>
+		<script src="./subscriber.js"></script>
+		<script src="./observer.js"></script>
+		<script src="./watcher.js"></script>
+		<script src="./compile.js"></script>
+		<script src="./mvvm.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input v-model="message"> {{message}}
+
+			<ul>
+				<li>姓名 : {{person.name}}</li>
+				<li>性别 : {{person.sex}}</li>
+				<li>年龄 : {{person.age}}</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		new MVVM({
+			el: '#app', // el: document.querySelector('#app')
+			data: {
+				message: 'hello mvvm',
+				person: {
+					name: '张三',
+					age: 18,
+					sex: '男'
+				}
+			}
+		})
+	</script>
+</html>

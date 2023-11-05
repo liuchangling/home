@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>手写mvvm</title>
+	</head>
+	<body>
+		<script src="./watcher.js"></script>
+		<script src="./compile.js"></script>
+		<script src="./observer.js"></script>
+		<script src="./mvvm.js"></script>
+
+		手写mvvm
+
+		<div id="app">
+			<!-- 双向绑定数据  靠的是表单 -->
+			<input type="text" v-model="message">
+			{{message}}
+
+			<ul>
+				<li>{{obj.a}}</li>
+				<li>{{obj.b}}</li>
+				<li>{{obj.c}}</li>
+			</ul>
+
+		</div>
+
+		<script>
+			let vm = new MVVM({
+				el: '#app',
+				data: {
+					message: 'hello vue',
+					obj: {
+						a: 'AA',
+						b: 'BB',
+						c: 'CC'
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
