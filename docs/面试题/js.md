@@ -260,3 +260,42 @@ https://www.jianshu.com/p/2a8cd4170765
 2. Generator 函数是将函数分步骤阻塞 ，只有主动调用 next() 才能进行下一步
 3. Async/Await 其实是 Generator的语法糖，yield命令后,只能是Thunk函数或Promise对象,而async函数的await命令后面,可以是Promise对象和原始类型的值
 
+22. 函数式组件是什么
+即所谓的受控组件。没有任何data ，只有可选的props
+```javascript
+Vue.component('my-component', {
+  functional: true,
+  // Props 是可选的
+  props: {
+    // ...
+  },
+  // 为了弥补缺少的实例
+  // 提供第二个参数作为上下文
+  render: function (createElement, context) {
+    // ...
+  }
+})
+```
+
+23. Vue.nextTick 是什么
+完成DOM更新，数据变化之后立即触发。
+
+Vue 在内部对异步队列尝试使用原生的 Promise.then、MutationObserver 和 setImmediate，如果执行环境不支持，则会采用 setTimeout(fn, 0) 代替。
+
+mounted 不会承诺所有的子组件也都一起被挂载。如果你希望等到整个视图都渲染完毕，可以用 vm.$nextTick 替换掉 mounted
+```javascript
+mounted() {
+    this.$nextTick(function () {
+    // Code that will run only after the
+    // entire view has been rendered
+    })
+}
+```
+
+24. set和数组的区别
+最根本的区别是数组是一个索引集合，这说明数组中的数据值按索引排序。数组就是用数字作为键名的对象
+相比之下，set是一个键的集合。set不使用索引，而是使用键对数据排序。set 中的元素按插入顺序是可迭代的，它不能包含任何重复的数据。换句话说，set中的每一项都必须是惟一的。
+
+
+25. 场景的BOM
+navigator history location
