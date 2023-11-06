@@ -79,3 +79,29 @@ function throttle(f, time){
 		
 	}
 }
+
+
+
+
+function debounce(fn , time){
+	let timer = null
+	return (args)=>{
+		if(timer){
+			clearTimeout(timer)
+		}
+		timer = setTimeout(()=>{
+			fn(args)
+		}, wait)
+	}
+}
+
+
+function throttle(fn, time){
+	return (args)=>{
+		if(timer) return 
+		timer = setTimeout(()=>{
+			fn(args)
+			clearTimeout(timer)
+		} ,wait)
+	}
+}
