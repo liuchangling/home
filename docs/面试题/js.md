@@ -91,8 +91,8 @@ function shuffle(array) {
 ```javascript
 //  <script>、<script async>和<script defer>的区别
 <script> : 加载的时候是同步的会阻塞后面代码的执行，加载立即执行。
-<script async>: 异步加载，加载和执行是并行的。
-<script defer>: 异步加载，需等到所有文档加载完才执行。(dom渲染后)
+<script async>: 异步加载，即下载不阻塞后面的加载。加载完后立即执行。
+<script defer>: 异步加载，即下载不阻塞后面的加载。但需等到所有文档加载完(dom渲染后)才执行。
 ```
 
 11. 浏览器中输入url到页面显示出来的过程发生了什么？
