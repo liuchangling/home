@@ -91,8 +91,8 @@ function shuffle(array) {
 ```javascript
 //  <script>、<script async>和<script defer>的区别
 <script> : 加载的时候是同步的会阻塞后面代码的执行，加载立即执行。
-<script async>: 异步加载，加载和执行是并行的。
-<script defer>: 异步加载，需等到所有文档加载完才执行。(dom渲染后)
+<script async>: 异步加载，即下载不阻塞后面的加载。加载完后立即执行。
+<script defer>: 异步加载，即下载不阻塞后面的加载。但需等到所有文档加载完(dom渲染后)才执行。
 ```
 
 11. 浏览器中输入url到页面显示出来的过程发生了什么？
@@ -328,3 +328,30 @@ new 操作符的实现步骤如下：
 为这个对象添加属性和方法）
 4.返回新的对象
 所以，上面的第二、三步，箭头函数都是没有办法执行的。
+
+
+29. 判断元素是否可见  IntersectionObserver API
+https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver/IntersectionObserver
+```javascript
+const ob = new IntersectionObserver(
+    (entries)=>{
+        for(const entry of entries){
+            const img = entry.target
+            img.src = img.dataset.src
+            ob.unobserve(img)
+        }
+    },
+    {
+        // root 默认null 表示视口，只能填其父元素或者更上级的父元素
+        // rootMargin 0
+        threshold:0 // 规定了一个监听目标与边界盒交叉区域的比例值，可以是一个具体的数值或是一组 0.0 到 1.0 之间的数组。若指定值为 0.0，则意味着监听元素即使与根有 1 像素交叉，此元素也会被视为可见。若指定值为 1.0，则意味着整个元素都在可见范围内时才算可见。
+    }
+)
+
+const imgs = document.querySelectorAll('.img')
+imgs.forEach(img=>ob.observer(img))
+```
+
+30. ReferenceError 是啥
+ReferenceError（引用错误）对象代表当一个不存在（或尚未初始化）的变量被引用时发生的错误。
+
