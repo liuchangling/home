@@ -1,0 +1,10 @@
+<body>
+  <h1>页面一</h1>
+  <button>发送</button>
+  <script>
+    document.querySelector("button").onclick = function () {
+      const channel = new BroadcastChannel("myChannel");
+      channel.postMessage("Hello from Tab 1!");
+    };
+  </script>
+</body>

@@ -1,0 +1,14 @@
+<body>
+  <h1>页面一</h1>
+  <button>发送</button>
+  <script>
+    let count = 0;
+    document.querySelector("button").onclick = function () {
+      const newTab = window.open("./2.html");
+      // 需要一定时间，同步执行会发送失败
+      setTimeout(()=>{
+        newTab.postMessage("Hello from Tab 1!", "*");
+      },2000)
+    };
+  </script>
+</body>

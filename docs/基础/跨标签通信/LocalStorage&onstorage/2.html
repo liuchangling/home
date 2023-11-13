@@ -1,0 +1,10 @@
+<body>
+  <h1>页面二</h1>
+  <script>
+    window.onstorage = (event) => {
+      if (event.key === "message") {
+        console.log(event.oldValue, "====>", event.newValue);
+      }
+    };
+  </script>
+</body>

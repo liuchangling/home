@@ -1,0 +1,12 @@
+<body>
+  <h1>页面一</h1>
+  <button>发送</button>
+  <script>
+    navigator.serviceWorker.register("./sw.js").then(() => {
+      console.log("service worker 注册成功");
+    });
+    document.querySelector("button").onclick = function () {
+      navigator.serviceWorker.controller.postMessage("hello");
+    };
+  </script>
+</body>

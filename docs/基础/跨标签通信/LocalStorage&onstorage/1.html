@@ -1,0 +1,10 @@
+<body>
+  <h1>页面一</h1>
+  <button>发送</button>
+  <script>
+    let count = 0;
+    document.querySelector("button").onclick = function () {
+      localStorage.setItem("message", count++);
+    };
+  </script>
+</body>

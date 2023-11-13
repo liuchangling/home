@@ -1,0 +1,25 @@
+跨标签页通信的8种方式
+https://juejin.cn/post/7294085118914134056
+BroadCast Channel
+Service Worker
+LocalStorage window.onstorage 监听
+window.open、window.postMessage
+Shared Worker 定时器轮询（ setInterval ）
+IndexedDB 定时器轮询（ setInterval ）
+cookie 定时器轮询（ setInterval ）
+Websocket
+
+
+BroadCast Channel：使用Broadcast Channel API可以在不同的浏览器上下文之间进行消息广播和接收。通过创建一个广播频道，并在不同的标签页中监听该频道，可以实现跨标签页通信。
+
+
+Service Worker：Service Worker是一种在浏览器后台运行的脚本，可以拦截和处理网络请求。通过在Service Worker中监听和处理消息事件，可以实现跨标签页通信。
+
+
+LocalStorage window.onstorage 监听：通过在不同的标签页中监听LocalStorage的变化，可以实现跨标签页通信。当一个标签页修改LocalStorage的值时，其他标签页可以通过监听storage事件来获取最新值。
+
+
+window.open、window.postMessage：通过在一个标签页中使用window.open打开另一个标签页，并使用window.postMessage进行消息传递，可以实现跨标签页通信。这种方式适用于需要直接传递数据或消息的场景。
+
+
+这些方案各有特点和适用场景。Broadcast Channel适用于需要实时广播消息给所有打开的标签页的场景；Service Worker适用于需要在后台进行数据处理或者发送消息给其他标签页的场景；LocalStorage window.onstorage监听适用于需要共享数据并及时获取更新的场景；window.open、window.postMessage适用于需要直接传递数据或消息的场景。

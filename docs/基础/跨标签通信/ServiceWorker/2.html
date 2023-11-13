@@ -1,0 +1,11 @@
+<body>
+  <h1>页面二</h1>
+  <script>
+    navigator.serviceWorker.register("./sw.js").then(() => {
+      console.log("service worker 注册成功");
+    });
+    navigator.serviceWorker.onmessage = function ({ data }) {
+      console.log(data);
+    };
+  </script>
+</body>
