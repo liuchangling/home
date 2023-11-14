@@ -10,16 +10,20 @@ cookie 定时器轮询（ setInterval ）
 Websocket
 
 
-BroadCast Channel：使用Broadcast Channel API可以在不同的浏览器上下文之间进行消息广播和接收。通过创建一个广播频道，并在不同的标签页中监听该频道，可以实现跨标签页通信。
 
+
+页面简化了 没有设置字符集， nginx设置一下
+charset utf-8;
+
+
+BroadCast Channel：使用Broadcast Channel API可以在不同的浏览器上下文之间进行消息广播和接收。通过创建一个广播频道，并在不同的标签页中监听该频道，可以实现跨标签页通信。
 
 Service Worker：Service Worker是一种在浏览器后台运行的脚本，可以拦截和处理网络请求。通过在Service Worker中监听和处理消息事件，可以实现跨标签页通信。
 
-
 LocalStorage window.onstorage 监听：通过在不同的标签页中监听LocalStorage的变化，可以实现跨标签页通信。当一个标签页修改LocalStorage的值时，其他标签页可以通过监听storage事件来获取最新值。
-
 
 window.open、window.postMessage：通过在一个标签页中使用window.open打开另一个标签页，并使用window.postMessage进行消息传递，可以实现跨标签页通信。这种方式适用于需要直接传递数据或消息的场景。
 
-
 这些方案各有特点和适用场景。Broadcast Channel适用于需要实时广播消息给所有打开的标签页的场景；Service Worker适用于需要在后台进行数据处理或者发送消息给其他标签页的场景；LocalStorage window.onstorage监听适用于需要共享数据并及时获取更新的场景；window.open、window.postMessage适用于需要直接传递数据或消息的场景。
+
+这些通信方式各有优劣，选择适合的方式取决于具体的需求和场景。Shared Worker 和 Websocket 提供了实时性和双向通信的能力，适用于需要实时更新和交互的应用。IndexedDB 和 Cookie 则适用于需要存储和同步数据的场景，但相对于实时性较差。根据具体需求，可以选择合适的通信方式来实现跨标签页的通信。

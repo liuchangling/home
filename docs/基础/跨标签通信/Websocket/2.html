@@ -1,0 +1,12 @@
+<body>
+  <h1>页面二</h1>
+  <button>发送</button>
+  <script>
+    // 创建一个 WebSocket 连接
+    const socket = new WebSocket("ws://localhost:8080");
+    // 监听来自服务器的消息
+    socket.onmessage = function (event) {
+      console.log("Received message:", event.data);
+    };
+  </script>
+</body>

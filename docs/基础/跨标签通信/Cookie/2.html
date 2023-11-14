@@ -1,0 +1,29 @@
+<body>
+  <h1>页面二</h1>
+  <script>
+    // 创建一个定时器，每隔一段时间轮询 Cookie 中的数据
+    setInterval(function () {
+      // 获取存储在 Cookie 中的消息
+      const cookies = document.cookie.split(";");
+      let message = "";
+
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+
+        if (cookie.startsWith("message=")) {
+          message = cookie.substring("message=".length);
+          break;
+        }
+      }
+
+      // 处理消息
+      if (message) {
+        console.log("Received message:", decodeURIComponent(message));
+
+        // 清除 Cookie
+        document.cookie =
+          "message=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      }
+    }, 1000);
+  </script>
+</body>

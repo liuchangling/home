@@ -1,0 +1,38 @@
+<body>
+  <h1>页面一</h1>
+  <button>发送</button>
+  <script>
+    // 打开或创建 IndexedDB 数据库
+    const request = indexedDB.open("messageDatabase", 3);
+    let db = null;
+
+    request.onupgradeneeded = function (event) {
+      db = event.target.result;
+
+      // 创建一个对象存储空间用于存储消息
+      db.createObjectStore("messages", { keyPath: "id", autoIncrement: true });
+    };
+
+    request.onsuccess = function (event) {
+      db = event.target.result;
+    };
+
+    request.onerror = function (event) {
+      console.error("Error opening database:", event.target.error);
+    };
+
+    document.querySelector("button").onclick = function () {
+      // 向数据库中添加一条新消息
+      const transaction = db.transaction(["messages"], "readwrite");
+      const objectStore = transaction.objectStore("messages");
+
+      const message = { content: "Hello from sender!" };
+
+      objectStore.add(message);
+
+      transaction.oncomplete = function () {
+        console.log("Message sent successfully!");
+      };
+    };
+  </script>
+</body>

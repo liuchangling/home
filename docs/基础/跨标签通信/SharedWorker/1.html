@@ -1,0 +1,16 @@
+<body>
+  <h1>页面一</h1>
+  <button>发送</button>
+  <script>
+    // 创建一个 Shared Worker
+    const worker = new SharedWorker("./worker.js",'hello');
+
+    // 监听来自 Shared Worker 的消息
+    worker.port.onmessage = (e) => console.log(e.data);
+
+    document.querySelector("button").onclick = function () {
+      // 向 Shared Worker 发送消息
+      worker.port.postMessage("我是页面一");
+    };
+  </script>
+</body>

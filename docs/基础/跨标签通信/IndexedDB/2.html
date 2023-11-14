@@ -1,0 +1,49 @@
+<body>
+  <h1>页面二</h1>
+  <script>
+    // 打开或创建 IndexedDB 数据库
+    const request = indexedDB.open("messageDatabase", 3);
+
+    request.onsuccess = function (event) {
+      const db = event.target.result;
+
+      // 创建一个定时器，每隔一段时间轮询数据库中的消息
+      setInterval(function () {
+        // 创建一个事务
+        const transaction = db.transaction(["messages"], "readwrite");
+        const objectStore = transaction.objectStore("messages");
+
+        // 获取存储在对象存储中的所有消息
+        const request = objectStore.getAll();
+
+        request.onsuccess = function (event) {
+          const messages = event.target.result;
+
+          // 处理消息
+          messages.forEach(function (message) {
+            console.log("Received message:", message.content);
+
+            // 在处理完消息后，删除该消息
+            objectStore.delete(message.id);
+          });
+
+          // 关闭事务
+          transaction.oncomplete = function () {
+            // console.log("Messages processed successfully!");
+          };
+        };
+
+        request.onerror = function (event) {
+          console.error("Error retrieving messages:", event.target.error);
+
+          // 关闭事务
+          transaction.abort();
+        };
+      }, 1000);
+    };
+
+    request.onerror = function (event) {
+      console.error("Error opening database:", event.target.error);
+    };
+  </script>
+</body>
