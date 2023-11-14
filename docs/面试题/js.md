@@ -355,3 +355,74 @@ imgs.forEach(img=>ob.observer(img))
 30. ReferenceError 是啥
 ReferenceError（引用错误）对象代表当一个不存在（或尚未初始化）的变量被引用时发生的错误。
 
+
+31. 闭包的例子
+
+当谈到 JavaScript 中的闭包时，有几个常见的例子可以帮助我们理解闭包的概念。下面是三个示例：
+
+计数器：
+```javascript
+function createCounter() {
+  let count = 0;
+  
+  // 返回一个函数作为闭包
+  return function() {
+    count++;
+    console.log(count);
+  };
+}
+
+const counter = createCounter();
+counter(); // 输出 1
+counter(); // 输出 2
+counter(); // 输出 3
+```
+在这个例子中，createCounter 函数返回一个内部函数作为闭包。该内部函数可以在每次被调用时增加计数器的值，并打印出最新的计数器值。由于内部函数保留对外部环境的引用，即 count 变量，计数器的状态在闭包中得以保留。
+
+私有变量：
+```javascript
+function createPerson(name) {
+  let age = 0;
+  
+  return {
+    getName: function() {
+      return name;
+    },
+    getAge: function() {
+      return age;
+    },
+    increaseAge: function() {
+      age++;
+    }
+  };
+}
+
+const person = createPerson('Alice');
+
+console.log(person.getName()); // 输出 "Alice"
+console.log(person.getAge()); // 输出 0
+person.increaseAge();
+console.log(person.getAge()); // 输出 1
+```
+这个例子中，createPerson 函数返回一个包含三个方法的对象。这些方法都可以访问到 name 和 age 变量。由于这些方法在闭包中定义，外部无法直接访问和修改 age 变量，从而实现了私有变量的效果。
+
+循环中的延迟：
+```javascript
+for (let i = 1; i <= 5; i++) {
+  setTimeout(function() {
+    console.log(i);
+  }, 1000);
+}
+```
+在这个例子中，使用 setTimeout 创建了五个定时任务，每个任务都在 1000 毫秒后输出变量 i 的值。尽管循环在瞬间执行完毕，但由于闭包的存在，每个定时任务都将保留对循环中每个迭代变量的引用，因此在回调函数中可以正确地展示每个循环迭代的值。
+
+这些是三个常见的 JavaScript 闭包的例子，它们展示了闭包的不同用途：保存状态、实现私有性和解决循环中的问题。
+
+如果有任何进一步的问题，请随时提问。
+
+
+
+
+
+
+
