@@ -27,3 +27,51 @@ v-show 由false变为true的时候不会触发组件的生命周期
 v-if由false变为true的时候，触发组件的beforeCreate、create、beforeMount、mounted钩子，由true变为false的时候触发组件的beforeDestory、destoryed方法
 
 性能消耗：v-if有更高的切换消耗；v-show有更高的初始渲染消耗；
+
+5. 防重
+```javascript
+import { throttle } from 'lodash'
+
+// 修改方式: @keyup.native.enter="login" ->  v-throttleEnter="login"
+// useage: v-throttleEnter:1000="login"  1s节流
+// login必须是一个函数，如果不是函数，loadsh会报错
+// 目前暂不支持给login函数传入入参
+const throttleEnter = {
+  bind: function(el, binding) {
+    // 默认节流时间=500ms
+    const delay = parseInt(binding.arg) || 500
+    const callback = binding.value
+
+    const throttleCallback = throttle(callback, delay)
+
+    el.addEventListener('keyup', function(event) {
+      if (event.keyCode === 13) { // 检查是否是回车键
+        throttleCallback()
+      }
+    })
+  }
+}
+
+export default throttleEnter
+
+
+const on = Vue.prototype.$on
+// 节流时间0.5s
+const throttleTime = 500
+
+Vue.prototype.$on = function (event, func) {
+  let previous = 0
+  let newFunc = func
+  if (event === 'click') {
+    newFunc = function () {
+      const now = new Date().getTime()
+      if (previous + throttleTime <= now) {
+        func.apply(this, arguments)
+        previous = now
+      }
+    }
+  }
+  on.call(this, event, newFunc)
+}
+```
+
