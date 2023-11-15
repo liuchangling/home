@@ -63,3 +63,11 @@ this.context = this.preview.getContext('2d')
 ```
 
 5. destory周期销毁并释放内存 this.pdf.destroy()
+
+
+6. 拖动逻辑
+- 子绝父相的定位
+- mousedown时，记下按下位置，标记按下的元素
+- mousemove时，找到之前按下的元素，计算拖动后的坐标，并对范围进行修正
+- 根据x，y坐标，触发style更新
+- mouseup时，移除按下元素的标记
