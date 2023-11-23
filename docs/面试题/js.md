@@ -421,8 +421,34 @@ for (let i = 1; i <= 5; i++) {
 如果有任何进一步的问题，请随时提问。
 
 
+32. 执行结果是？
+```javascript
+var test = 'hello world'
+(function test(){
+        test = 'lcl'
+        console.log(test)
+})()
+
+// Uncaught TypeError: "hello world" is not a function
+```
+
+33. var 和 let的区别
+var 相当于在window上修改属性。 let是块级作用域，块外无法访问
+var 运行重复申明，let不允许
+var 会提升申明。let 有暂时性死区（块级作用域开始到申明之间这段），访问会ReferenceError  
 
 
+34. 读代码
+```javascript
+var a = {n:1}
+var b = a
 
+a.x = a = {n:2}
+console.log(a.x) // undefined
+console.log(b.x) // {n:2}
+```
 
-
+原因：
+1. a.x 现在原来的堆内存开辟了一个新的属性 x， 等待表达式右边计算结果
+2. a = {n:2} 将a指向了新的堆内存。并返回了一个内存地址c
+3. 堆内存1的x 指向了 c。 所以 b.x 指向了c 所以b.x -> {n:2}。 而a指向的新堆内存没有x属性，所以是undefined
